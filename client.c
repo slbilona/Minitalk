@@ -1,6 +1,7 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int	ft_atoi(const char *nptr)
 {
@@ -27,27 +28,62 @@ int	ft_atoi(const char *nptr)
 	return (result * sign);
 }
 
-void ft_binaire(int c)
+int ft_strlen(char *str)
 {
 	int i;
-	char result[30];
-	char *base = "01";
 
 	i = 0;
-	if(c >= 0 && c <= 1)
-	{
-		result[i] = base[c];
+	while(str[i])
 		i++;
-	}
-	else if (c > 1)
-	{
-		ft_binaire(c / 2);
-		ft_binaire(c % 2);
-	}
-	printf("%s\n", result);
+	return (i);
 }
 
+char *ft_strcat(char *str, char c)
+{
+	int i;
+	char *new;
+	i = 0;
+	new = malloc(sizeof(char) * (ft_strlen(str) + 2));
+	while(str[i])
+	{
+		new[i] = str[i];
+		i++;
+	}
+	new[i] = c;
+	new[i + 1] = 0;
+	free(str);
+	return (new);
+}
 
+int ft_binaire(int c, int *result)
+{
+	char *base = "01";
+	if(c == 0 || c == 1)
+		*result = *result * 10 + (base[c] - 48);
+	else
+	{
+		*result = ft_binaire(c / 2, result);
+		*result = ft_binaire(c % 2, result);
+	}
+	return (*result);
+}
+
+char ft_non_binaire(int c, int *result)
+{
+	if(c == 0 || (c >= 1 && c <= 9))
+	{
+		if(c == 1)
+			*result = *result * 2 + 1;
+		else
+			*result = *result * 2;
+	}
+	else
+	{
+		*result = ft_non_binaire(c / 10, result);
+		*result = ft_non_binaire(c % 10, result);
+	}
+	return (*result);
+}
 int main()
 {
 	// int pid;
@@ -62,6 +98,11 @@ int main()
 	// 	}
 	// 	kill(pid, SIGUSR1);
 	// }
-	ft_binaire('s');
+	int result = 0;
+	int bin = ft_binaire('c', &result);
+	printf("binaire : %d\n", bin);
+	result = 0;
+	int result2 = 0;
+	printf("plus binaire : %c\n", ft_non_binaire(bin, &result2));
 }
 
