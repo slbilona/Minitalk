@@ -2,6 +2,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "./Ma_Libft/libft.h"
 
 int	ft_atoi(const char *nptr)
 {
@@ -26,16 +27,6 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (result * sign);
-}
-
-int ft_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	while(str[i])
-		i++;
-	return (i);
 }
 
 char *ft_strcat(char *str, char c)
@@ -70,6 +61,10 @@ int ft_binaire(int c, int *result)
 
 int main(int ac, char **av)
 {
+	char *test;
+	char c;
+	int result;
+	int i = 0;
 	int pid;
 
 	if(ac == 3)
@@ -80,7 +75,18 @@ int main(int ac, char **av)
 			printf("error\n");
 			return (0);
 		}
-		kill(pid, SIGUSR1);
+		c = av[2][0];
+		ft_binaire(c, &result);
+		test = ft_itoa(result);
+		while(test[i])
+		{
+			//printf("i : %d\n", i);
+			if(test[i] == '0')
+				kill(pid, SIGUSR1);
+			else if (test[i] == '1')
+				kill(pid, SIGUSR2);
+			i++;
+		}
 	}
 }
 

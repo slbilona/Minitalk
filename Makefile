@@ -14,23 +14,28 @@ CFLAGS = -Wall -Werror -Wextra
 
 RM = rm -f
 
+LIBFT = Ma_Libft/libft.a
+
 all : $(NAME)
-	@echo "test"
 
 $(NAME) : client server
 
 client : $(OBJS_CLIENT)
-	$(CC) -o client $(OBJS_CLIENT)
+	make -C Ma_Libft
+	$(CC) $(OBJS_CLIENT) $(LIBFT) -o client 
 
 server : $(OBJS_SERVER)
-	$(CC) -o server $(OBJS_SERVER)
+	make -C Ma_Libft
+	$(CC) $(OBJS_SERVER) $(LIBFT) -o server 
 
 clean : 
+	make clean -C Ma_Libft
 	$(RM) *.o 
 	clear
 	@echo "🧚 tout propre 🧚"
 
 fclean :
+	make fclean -C Ma_Libft
 	$(RM) *.o server client
 	clear
 	@echo "🧚 tout propre 🧚"

@@ -2,18 +2,14 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <signal.h>
+#include "./Ma_Libft/libft.h"
 
 void ft_franchement_jsp(int sig)
 {
 	if(sig == SIGUSR1)
-		printf("envoye\n");
+		printf("0");
 	else if (sig == SIGUSR2)
-		printf("recu\n");
-}
-
-void ft_peut_etre_que_je_sais()
-{
-	printf("encore\n");
+		printf("1");
 }
 
 char ft_non_binaire(int c, int *result)
@@ -37,8 +33,12 @@ int main()
 {
 	int pid_t = getpid();
 	printf("PID : %d\n", pid_t);
-	signal(SIGUSR1, ft_franchement_jsp);
-	signal(SIGUSR2, ft_franchement_jsp);
+	while(1)
+	{
+		signal(SIGUSR1, ft_franchement_jsp);
+		signal(SIGUSR2, ft_franchement_jsp);
+		sleep(3);
+	}
 	pause();
 	return (0);
 }
