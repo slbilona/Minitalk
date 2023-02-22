@@ -80,12 +80,13 @@ int main(int ac, char **av)
 		test = ft_itoa(result);
 		while(test[i])
 		{
-			//printf("i : %d\n", i);
+			printf("i : %d\n", i);
 			if(test[i] == '0')
 				kill(pid, SIGUSR1);
 			else if (test[i] == '1')
 				kill(pid, SIGUSR2);
 			i++;
+			usleep(1);
 		}
 	}
 }

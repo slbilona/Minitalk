@@ -7,9 +7,9 @@
 void ft_franchement_jsp(int sig)
 {
 	if(sig == SIGUSR1)
-		printf("0");
+		printf("0\n");
 	else if (sig == SIGUSR2)
-		printf("1");
+		printf("1\n");
 }
 
 char ft_non_binaire(int c, int *result)
@@ -37,7 +37,7 @@ int main()
 	{
 		signal(SIGUSR1, ft_franchement_jsp);
 		signal(SIGUSR2, ft_franchement_jsp);
-		sleep(3);
+		usleep(1);
 	}
 	pause();
 	return (0);
