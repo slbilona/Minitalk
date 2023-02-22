@@ -4,14 +4,15 @@
 #include <signal.h>
 #include "./Ma_Libft/libft.h"
 
-void ft_franchement_jsp(int sig)
+void ft_franchement_jsp()
 {
-	if(sig == SIGUSR1)
-		printf("0\n");
-	else if (sig == SIGUSR2)
-		printf("1\n");
+	printf("0\n");
 }
 
+void ft_peut_etre_qe_si()
+{
+	printf("1\n");
+}
 char ft_non_binaire(int c, int *result)
 {
 	if(c == 0 || (c >= 1 && c <= 9))
@@ -36,8 +37,8 @@ int main()
 	while(1)
 	{
 		signal(SIGUSR1, ft_franchement_jsp);
-		signal(SIGUSR2, ft_franchement_jsp);
-		usleep(1);
+		signal(SIGUSR2, ft_peut_etre_qe_si);
+		usleep(5);
 	}
 	pause();
 	return (0);

@@ -86,7 +86,7 @@ int main(int ac, char **av)
 			else if (test[i] == '1')
 				kill(pid, SIGUSR2);
 			i++;
-			usleep(1);
+			usleep(5);
 		}
 	}
 }
