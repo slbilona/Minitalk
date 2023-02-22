@@ -68,41 +68,19 @@ int ft_binaire(int c, int *result)
 	return (*result);
 }
 
-char ft_non_binaire(int c, int *result)
+int main(int ac, char **av)
 {
-	if(c == 0 || (c >= 1 && c <= 9))
-	{
-		if(c == 1)
-			*result = *result * 2 + 1;
-		else
-			*result = *result * 2;
-	}
-	else
-	{
-		*result = ft_non_binaire(c / 10, result);
-		*result = ft_non_binaire(c % 10, result);
-	}
-	return (*result);
-}
-int main()
-{
-	// int pid;
+	int pid;
 
-	// if(ac == 3)
-	// {
-	// 	pid = ft_atoi(av[1]);
-	// 	if(pid == -1)
-	// 	{
-	// 		printf("error\n");
-	// 		return (0);
-	// 	}
-	// 	kill(pid, SIGUSR1);
-	// }
-	int result = 0;
-	int bin = ft_binaire('c', &result);
-	printf("binaire : %d\n", bin);
-	result = 0;
-	int result2 = 0;
-	printf("plus binaire : %c\n", ft_non_binaire(bin, &result2));
+	if(ac == 3)
+	{
+		pid = ft_atoi(av[1]);
+		if(pid == -1)
+		{
+			printf("error\n");
+			return (0);
+		}
+		kill(pid, SIGUSR1);
+	}
 }
 
