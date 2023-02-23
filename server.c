@@ -69,7 +69,6 @@ void ft_peut_etre_que_si()
 	}
 }
 
-
 int main()
 {
 	int pid_t = getpid();
