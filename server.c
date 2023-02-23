@@ -41,10 +41,7 @@ void ft_franchement_jsp()
 		printf("%c\n", charac);
 		i = 7;
 		while(i >= 0)
-		{
-			lettre[i] = 0;
-			i--;
-		}
+			lettre[i--] = 0;
 	}
 }
 

@@ -66,7 +66,9 @@ int main(int ac, char **av)
 	int result;
 	int i;
 	int pid;
+	int j;
 
+	j = 0;
 	result = 0;
 	i = 0;
 	if(ac == 3)
@@ -77,20 +79,27 @@ int main(int ac, char **av)
 			printf("error\n");
 			return (0);
 		}
-		c = av[2][0];
-		test = ft_itoa(ft_binaire(c, &result));
-		printf("%s\n", test);
-		while(test[i])
+		while(av[2][j])
 		{
-			//printf("i : %d\n", i);
-			if(test[i] == '0')
-				kill(pid, SIGUSR1);
-			else if (test[i] == '1')
-				kill(pid, SIGUSR2);
-			i++;
+			c = av[2][j];
+			result = 0;
+			i = 0;
+			test = ft_itoa(ft_binaire(c, &result));
+			printf("%s\n", test);
+			while(test[i])
+			{
+				//printf("i : %d\n", i);
+				if(test[i] == '0')
+					kill(pid, SIGUSR1);
+				else if (test[i] == '1')
+					kill(pid, SIGUSR2);
+				i++;
+				usleep(1);
+			}
 			usleep(1);
+			free(test);
+			j++;
 		}
-		free(test);
 	}
 }
 
