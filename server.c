@@ -4,15 +4,8 @@
 #include <signal.h>
 #include "./Ma_Libft/libft.h"
 
-void ft_franchement_jsp()
-{
-	printf("0\n");
-}
+char lettre[8];
 
-void ft_peut_etre_qe_si()
-{
-	printf("1\n");
-}
 char ft_non_binaire(int c, int *result)
 {
 	if(c == 0 || (c >= 1 && c <= 9))
@@ -30,6 +23,42 @@ char ft_non_binaire(int c, int *result)
 	return (*result);
 }
 
+void ft_franchement_jsp()
+{
+	int i;
+	int charac;
+	i = 0;
+	lettre[7] = 0;
+	charac = 0;
+	while(lettre[i])
+		i++;
+	lettre[i] = '0';
+	if(ft_strlen(lettre) == 7)
+	{
+		ft_non_binaire(ft_atoi(lettre), &charac);
+		printf("%c\n", charac);
+	}
+}
+
+void ft_peut_etre_qe_si()
+{
+	int i;
+	int charac;
+	i = 0;
+	lettre[7] = 0;
+	charac = 0;
+	while(lettre[i])
+		i++;
+	lettre[i] = '1';
+	if(ft_strlen(lettre) == 7)
+	{
+		ft_non_binaire(ft_atoi(lettre), &charac);
+		printf("%c\n", charac);
+		exit(EXIT_SUCCESS);
+	}
+}
+
+
 int main()
 {
 	int pid_t = getpid();
@@ -38,7 +67,6 @@ int main()
 	{
 		signal(SIGUSR1, ft_franchement_jsp);
 		signal(SIGUSR2, ft_peut_etre_qe_si);
-		usleep(5);
 	}
 	pause();
 	return (0);

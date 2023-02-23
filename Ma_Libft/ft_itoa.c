@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilselbon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ilselbon <ilselbon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:40:33 by ilselbon          #+#    #+#             */
-/*   Updated: 2022/11/21 13:36:53 by ilselbon         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:42:56 by ilselbon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static	int	ft_compte(int n)
 	compte = 0;
 	if (n < 0)
 	{
-		compte ++;
+		compte++;
 		n = n * -1;
 	}
 	if (n >= 0 && n <= 9)
