@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <signal.h>
-#include "./Ma_Libft/libft.h"
+#include "server.h"
 
 char lettre[8];
 
@@ -36,6 +32,10 @@ void ft_franchement_jsp()
 	if(ft_strlen(lettre) == 7)
 	{
 		ft_non_binaire(ft_atoi(lettre), &charac);
+		if(charac == 0)
+		{
+
+		}
 		printf("%c\n", charac);
 		i = 7;
 		while(i >= 0)

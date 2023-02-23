@@ -107,7 +107,13 @@ int main(int ac, char **av)
 			free(test);
 			j++;
 		}
-		
+		i = 8;
+		while(i)
+		{
+			kill(pid, SIGUSR1);
+			usleep(1);
+			i--;
+		}
 	}
 }
 
