@@ -91,13 +91,11 @@ int main(int ac, char **av)
 					kill(pid, SIGUSR1);
 					usleep(1);
 					i++;
-					
 				}
 			}
 			i = 0;
 			while(test[i])
 			{
-				//printf("i : %d\n", i);
 				if(test[i] == '0')
 					kill(pid, SIGUSR1);
 				else if (test[i] == '1')
@@ -109,6 +107,7 @@ int main(int ac, char **av)
 			free(test);
 			j++;
 		}
+		
 	}
 }
 

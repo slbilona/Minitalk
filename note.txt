@@ -1,0 +1,4 @@
+idee 1 :
+enovoyer chaque charac dans un mailloon de liste chainee
+envoyer 0000000 lorsque j'ai envoye toutes la chaine de caractere
+creer ma nouvelle chaine de caracter dans server puis l'afficher

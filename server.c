@@ -23,8 +23,6 @@ char ft_non_binaire(int c, int *result)
 	return (*result);
 }
 
-
-
 void ft_franchement_jsp()
 {
 	int i;
