@@ -64,10 +64,11 @@ int main(int ac, char **av)
 	char *test;
 	char c;
 	int result;
-	int i = 0;
+	int i;
 	int pid;
 
 	result = 0;
+	i = 0;
 	if(ac == 3)
 	{
 		pid = ft_atoi(av[1]);
@@ -78,6 +79,7 @@ int main(int ac, char **av)
 		}
 		c = av[2][0];
 		test = ft_itoa(ft_binaire(c, &result));
+		printf("%s\n", test);
 		while(test[i])
 		{
 			//printf("i : %d\n", i);

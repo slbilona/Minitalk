@@ -23,6 +23,8 @@ char ft_non_binaire(int c, int *result)
 	return (*result);
 }
 
+
+
 void ft_franchement_jsp()
 {
 	int i;
@@ -37,13 +39,20 @@ void ft_franchement_jsp()
 	{
 		ft_non_binaire(ft_atoi(lettre), &charac);
 		printf("%c\n", charac);
+		i = 7;
+		while(i >= 0)
+		{
+			lettre[i] = 0;
+			i--;
+		}
 	}
 }
 
-void ft_peut_etre_qe_si()
+void ft_peut_etre_que_si()
 {
 	int i;
 	int charac;
+
 	i = 0;
 	lettre[7] = 0;
 	charac = 0;
@@ -54,7 +63,9 @@ void ft_peut_etre_qe_si()
 	{
 		ft_non_binaire(ft_atoi(lettre), &charac);
 		printf("%c\n", charac);
-		exit(EXIT_SUCCESS);
+		i = 7;
+		while(i >= 0)
+			lettre[i--] = 0;
 	}
 }
 
@@ -66,7 +77,7 @@ int main()
 	while(1)
 	{
 		signal(SIGUSR1, ft_franchement_jsp);
-		signal(SIGUSR2, ft_peut_etre_qe_si);
+		signal(SIGUSR2, ft_peut_etre_que_si);
 	}
 	pause();
 	return (0);
