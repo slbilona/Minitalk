@@ -2,6 +2,43 @@
 
 char lettre[8];
 
+int	ft_lstsize(chaine *lst)
+{
+	chaine	*actuel;
+	int		i;
+
+	actuel = lst;
+	if (actuel)
+		i = 1;
+	else
+		return (0);
+	while (actuel->next)
+	{
+		actuel = actuel->next;
+		i++;
+	}
+	return (i);
+}
+
+void ft_chaine_de_charac(chaine **list)
+{
+	chaine *actuel;
+	char *new;
+	int i;
+
+	i = 0;
+	actuel = *list;
+	new = malloc(sizeof(char) * (ft_lstsize(*list) + 1));
+	while(actuel)
+	{
+		new[i] = actuel->c;
+		i++;
+	}
+	new[i] = 0;
+	printf("%s\n", new);
+	free(new);
+}
+
 char ft_non_binaire(int c, int *result)
 {
 	if(c == 0 || (c >= 1 && c <= 9))
@@ -34,7 +71,7 @@ void ft_franchement_jsp()
 		ft_non_binaire(ft_atoi(lettre), &charac);
 		if(charac == 0)
 		{
-
+			ft_chaine_de_charac(list);
 		}
 		printf("%c\n", charac);
 		i = 7;
