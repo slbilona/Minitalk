@@ -36,7 +36,6 @@ void ft_chaine_de_charac(char c)
 	}
 	else
 		chaine = ft_strcat(chaine, c);
-	//printf("%s\n", chaine);
 }
 
 char ft_non_binaire(int c, int *result)
@@ -67,14 +66,14 @@ void ft_franchement_jsp()
 	while(lettre[i])
 		i++;
 	lettre[i] = '0';
-	if(ft_strlen(lettre) == 7)
+	if(i == 6)
 	{
 		ft_non_binaire(ft_atoi(lettre), &charac);
 		ft_chaine_de_charac(charac);
 		//printf("%c\n", charac);
-		i = 7;
-		while(i >= 0)
-			lettre[i--] = 0;
+		i = 0;
+		while(i < 7)
+			lettre[i++] = 0;
 	}
 }
 
@@ -89,14 +88,14 @@ void ft_peut_etre_que_si()
 	while(lettre[i])
 		i++;
 	lettre[i] = '1';
-	if(ft_strlen(lettre) == 7)
+	if(i == 6)
 	{
 		ft_non_binaire(ft_atoi(lettre), &charac);
 		ft_chaine_de_charac(charac);
 		//printf("%c\n", charac);
-		i = 7;
-		while(i >= 0)
-			lettre[i--] = 0;
+		i = 0;
+		while(i < 7)
+			lettre[i++] = 0;
 	}
 }
 

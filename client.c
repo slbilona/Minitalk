@@ -72,6 +72,7 @@ int main(int ac, char **av)
 	i = 0;
 	if(ac == 3)
 	{
+		usleep(1);
 		pid = ft_atoi(av[1]);
 		if(pid == -1)
 		{
@@ -83,13 +84,13 @@ int main(int ac, char **av)
 			result = 0;
 			i = 0;
 			test = ft_itoa(ft_binaire(av[2][j], &result));
-			//printf("%s\n", test);
+			//printf("%s, ", test);
 			if(ft_strlen(test) < 7)
 			{
 				while(i < (7 - (int)ft_strlen(test)))
 				{
 					kill(pid, SIGUSR1);
-					usleep(2);
+					usleep(1);
 					i++;
 				}
 			}
@@ -108,7 +109,7 @@ int main(int ac, char **av)
 			j++;
 		}
 		i = 0;
-		while(i <= 7)
+		while(i <= 6)
 		{
 			kill(pid, SIGUSR1);
 			usleep(1);

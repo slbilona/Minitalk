@@ -2,5 +2,7 @@
 make
 ./server &
 sleep 0.2
-./client $(pidof server) "$@"
+for arg in "$@"; do
+    ./client $(pidof server) "$arg"
+done
 kill $(pidof server)
