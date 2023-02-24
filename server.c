@@ -2,41 +2,41 @@
 
 char lettre[8];
 
-int	ft_lstsize(chaine *lst)
+char *ft_strcat(char *str, char c)
 {
-	chaine	*actuel;
-	int		i;
-
-	actuel = lst;
-	if (actuel)
-		i = 1;
-	else
-		return (0);
-	while (actuel->next)
-	{
-		actuel = actuel->next;
-		i++;
-	}
-	return (i);
-}
-
-void ft_chaine_de_charac(chaine **list)
-{
-	chaine *actuel;
-	char *new;
 	int i;
+	char *new;
 
 	i = 0;
-	actuel = *list;
-	new = malloc(sizeof(char) * (ft_lstsize(*list) + 1));
-	while(actuel)
+	if(!str)
+		new = malloc(sizeof(char) * 2);
+	else
 	{
-		new[i] = actuel->c;
-		i++;
+		new = malloc(sizeof(char) * (ft_strlen(str) + 2));
+		while(str[i])
+		{
+			new[i] = str[i];
+			i++;
+		}
 	}
-	new[i] = 0;
-	printf("%s\n", new);
-	free(new);
+	new[i] = c;
+	new[i + 1] = 0;
+	free(str);
+	return (new);
+}
+
+void ft_chaine_de_charac(char c)
+{
+	static char *chaine;
+
+	if(c == 0)
+	{
+		printf("%s\n", chaine);
+		chaine = NULL;
+	}
+	else
+		chaine = ft_strcat(chaine, c);
+	//printf("%s\n", chaine);
 }
 
 char ft_non_binaire(int c, int *result)
@@ -60,6 +60,7 @@ void ft_franchement_jsp()
 {
 	int i;
 	int charac;
+
 	i = 0;
 	lettre[7] = 0;
 	charac = 0;
@@ -69,11 +70,8 @@ void ft_franchement_jsp()
 	if(ft_strlen(lettre) == 7)
 	{
 		ft_non_binaire(ft_atoi(lettre), &charac);
-		if(charac == 0)
-		{
-			ft_chaine_de_charac(list);
-		}
-		printf("%c\n", charac);
+		ft_chaine_de_charac(charac);
+		//printf("%c\n", charac);
 		i = 7;
 		while(i >= 0)
 			lettre[i--] = 0;
@@ -94,7 +92,8 @@ void ft_peut_etre_que_si()
 	if(ft_strlen(lettre) == 7)
 	{
 		ft_non_binaire(ft_atoi(lettre), &charac);
-		printf("%c\n", charac);
+		ft_chaine_de_charac(charac);
+		//printf("%c\n", charac);
 		i = 7;
 		while(i >= 0)
 			lettre[i--] = 0;
@@ -104,6 +103,7 @@ void ft_peut_etre_que_si()
 int main()
 {
 	int pid_t = getpid();
+
 	printf("PID : %d\n", pid_t);
 	while(1)
 	{
