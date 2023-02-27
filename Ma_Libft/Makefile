@@ -34,6 +34,16 @@ SRCS = ft_memset.c \
 	ft_striteri.c \
 	get_next_line/get_next_line.c \
 	get_next_line/get_next_line_utils.c \
+	ft_printf/ft_check.c \
+	ft_printf/ft_putchar.c \
+	ft_printf/ft_put_u.c \
+	ft_printf/ft_printf.c \
+	ft_printf/ft_put_d.c \
+	ft_printf/ft_put_x.c \
+	ft_printf/ft_put_c.c \
+	ft_printf/ft_put_s.c \
+	ft_printf/ft_put_xmaj.c \
+	ft_printf/ft_put_p.c \
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
@@ -49,16 +59,13 @@ NAME = libft.a
 all: $(NAME)
 
 $(NAME) : $(OBJS)
-	make -C ft_printf
 	$(AR) $(NAME) $(OBJS)
 
 clean :
-	make clean -C ft_printf
-	$(RM) *.o get_next_line/*.o
+	$(RM) *.o get_next_line/*.o ft_printf/*.o
 
 fclean :
-	make fclean -C ft_printf
-	$(RM) $(NAME) *.o get_next_line/*.o
+	$(RM) $(NAME) *.o get_next_line/*.o ft_printf/*.o
 
 re : fclean all
 

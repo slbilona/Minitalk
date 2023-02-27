@@ -31,7 +31,7 @@ void ft_chaine_de_charac(char c)
 
 	if(c == 0)
 	{
-		printf("%s\n", chaine);
+		ft_printf("%s\n", chaine);
 		chaine = NULL;
 	}
 	else
