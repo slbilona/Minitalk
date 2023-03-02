@@ -25,7 +25,7 @@ char *ft_strcat(char *str, char c)
 	return (new);
 }
 
-void ft_chaine_de_charac(char c)
+char *ft_chaine_de_charac(char c)
 {
 	static char *chaine;
 
@@ -36,6 +36,7 @@ void ft_chaine_de_charac(char c)
 	}
 	else
 		chaine = ft_strcat(chaine, c);
+	return (chaine);
 }
 
 char ft_non_binaire(int c, int *result)
@@ -101,9 +102,7 @@ void ft_peut_etre_que_si()
 
 int main()
 {
-	int pid_t = getpid();
-
-	printf("PID : %d\n", pid_t);
+	ft_printf("PID : %d\n", getpid());
 	while(1)
 	{
 		signal(SIGUSR1, ft_franchement_jsp);
