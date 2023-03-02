@@ -72,7 +72,7 @@ int main(int ac, char **av)
 	i = 0;
 	if(ac == 3)
 	{
-		usleep(100000);
+		usleep(40000);
 		pid = ft_atoi(av[1]);
 		if(pid == -1)
 		{
@@ -90,7 +90,7 @@ int main(int ac, char **av)
 				while(i < (7 - (int)ft_strlen(test)))
 				{
 					kill(pid, SIGUSR1);
-					usleep(100000);
+					usleep(60000);
 					i++;
 				}
 			}
@@ -102,9 +102,9 @@ int main(int ac, char **av)
 				else if (test[i] == '1')
 					kill(pid, SIGUSR2);
 				i++;
-				usleep(100000);
+				usleep(60000);
 			}
-			usleep(100000);
+			usleep(60000);
 			free(test);
 			j++;
 		}
@@ -112,7 +112,7 @@ int main(int ac, char **av)
 		while(i <= 6)
 		{
 			kill(pid, SIGUSR1);
-			usleep(100000);
+			usleep(70000);
 			i++;
 		}
 	}

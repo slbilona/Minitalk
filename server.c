@@ -9,7 +9,11 @@ char *ft_strcat(char *str, char c)
 
 	i = 0;
 	if(!str)
+	{
 		new = malloc(sizeof(char) * 2);
+		new[i] = c;
+		new[i + 1] = 0;
+	}
 	else
 	{
 		new = malloc(sizeof(char) * (ft_strlen(str) + 2));
@@ -18,10 +22,10 @@ char *ft_strcat(char *str, char c)
 			new[i] = str[i];
 			i++;
 		}
+		new[i] = c;
+		new[i + 1] = 0;
+		free(str);
 	}
-	new[i] = c;
-	new[i + 1] = 0;
-	free(str);
 	return (new);
 }
 
@@ -32,10 +36,14 @@ char *ft_chaine_de_charac(char c)
 	if(c == 0)
 	{
 		ft_printf("%s\n", chaine);
+		free(chaine);
 		chaine = NULL;
 	}
 	else
+	{
 		chaine = ft_strcat(chaine, c);
+		printf("%c\n", c);
+	}
 	return (chaine);
 }
 
