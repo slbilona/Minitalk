@@ -90,7 +90,7 @@ int main(int ac, char **av)
 				while(i < (7 - (int)ft_strlen(test)))
 				{
 					kill(pid, SIGUSR1);
-					usleep(60000);
+					usleep(55000);
 					i++;
 				}
 			}
@@ -102,7 +102,7 @@ int main(int ac, char **av)
 				else if (test[i] == '1')
 					kill(pid, SIGUSR2);
 				i++;
-				usleep(60000);
+				usleep(21000);
 			}
 			usleep(60000);
 			free(test);
