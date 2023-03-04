@@ -42,7 +42,7 @@ char *ft_chaine_de_charac(char c)
 	else
 	{
 		chaine = ft_strcat(chaine, c);
-		printf("%c\n", c);
+		//printf("%c\n", c);
 	}
 	return (chaine);
 }

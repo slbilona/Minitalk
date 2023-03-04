@@ -72,7 +72,7 @@ int main(int ac, char **av)
 	i = 0;
 	if(ac == 3)
 	{
-		usleep(30000);
+		usleep(35000);
 		pid = ft_atoi(av[1]);
 		if(pid == -1)
 		{
