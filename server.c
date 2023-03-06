@@ -1,4 +1,5 @@
 #include "server.h"
+#include <signal.h>
 
 char lettre[8];
 
@@ -108,17 +109,48 @@ char ft_non_binaire(int c, int *result)
 // 	}
 // }
 
+void ft_test(int ref, siginfo_t *siginfo, void *context)
+{
+	int pid;
+	int i;
+	int charac;
+	
+	(void) context;
+	(void) siginfo;
+	pid = siginfo->si_pid;
+	i = 0;
+	lettre[7] = 0;
+	charac = 0;
+	while(lettre[i])
+		i++;
+	if(ref == SIGUSR1)
+		lettre[i] = '0';
+	else if (ref == SIGUSR2)
+		lettre[i] = '1';
+	if (i == 6)
+	{
+		ft_non_binaire(ft_atoi(lettre), &charac);
+		ft_chaine_de_charac(charac);
+		i = 0;
+		while(i < 7)
+			lettre[i++] = 0;
+	}
+	kill(pid, SIGUSR1);
+}
+
 int main()
 {
 	struct sigaction sa;
 
-	sa.sa_sigaction = 
+	sa.sa_sigaction = ft_test;
+	sa.sa_flags = SA_SIGINFO;
+
+
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
+
 	ft_printf("PID : %d\n", getpid());
-	while(1)
-	{
-		signal(SIGUSR1, ft_franchement_jsp);
-		signal(SIGUSR2, ft_peut_etre_que_si);
-	}
+	while(1);
 	pause();
 	return (0);
 }

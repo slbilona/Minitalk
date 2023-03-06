@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include "./Ma_Libft/libft.h"
 
+int booleen = 0;
+
 int	ft_atoi(const char *nptr)
 {
 	int	result;
@@ -42,61 +44,86 @@ int ft_binaire(int c, int *result)
 	return (*result);
 }
 
-int main(int ac, char **av)
+void ft_yacine(int pid,char *str)
 {
 	char *test;
 	int result;
 	int i;
-	int pid;
 	int j;
+	
 
 	j = 0;
 	result = 0;
 	i = 0;
-	if(ac == 3)
+	while(str[j])
 	{
-		usleep(35000);
-		pid = ft_atoi(av[1]);
+		result = 0;
+		i = 0;
+		test = ft_itoa(ft_binaire(str[j], &result));
+		//printf("test : %s\n", test);
+		if(ft_strlen(test) < 7)
+		{
+			while(i < (7 - (int)ft_strlen(test)) && booleen == 0)
+			{
+				booleen = 1;
+				i++;
+				kill(pid, SIGUSR1);
+				while(booleen);
+			}
+		}
+		i = 0;
+		while(test[i] && booleen == 0)
+		{
+			//printf("booleen : %d\n", booleen);
+			if(test[i] == '0')
+				kill(pid, SIGUSR1);
+			else if (test[i] == '1')
+				kill(pid, SIGUSR2);
+			i++;
+			booleen = 1;
+			while(booleen);
+		}
+		free(test);
+		j++;
+	}
+	i = 0;
+	while(i <= 6 && booleen == 0)
+	{
+		i++;
+		booleen = 1;
+		kill(pid, SIGUSR1);
+		while(booleen);
+	}
+}
+
+void ft_principale(int ref)
+{
+	if(ref == 10)
+	{
+		booleen = 0;
+	}
+}
+
+int main(int ac, char **av)
+{
+	struct sigaction	sa;
+	int					pid;
+
+	pid = ft_atoi(av[1]);
+	sa.sa_handler = ft_principale;
+	sigaction(SIGUSR1, &sa, NULL);
+
+	if (ac == 3)
+	{
 		if(pid == -1)
 		{
 			printf("error\n");
 			return (0);
 		}
-		while(av[2][j])
-		{
-			result = 0;
-			i = 0;
-			test = ft_itoa(ft_binaire(av[2][j], &result));
-			//printf("%s, ", test);
-			if(ft_strlen(test) < 7)
-			{
-				while(i < (7 - (int)ft_strlen(test)))
-				{
-					kill(pid, SIGUSR1);
-					usleep(55000);
-					i++;
-				}
-			}
-			i = 0;
-			while(test[i])
-			{
-				if(test[i] == '0')
-					kill(pid, SIGUSR1);
-				else if (test[i] == '1')
-					kill(pid, SIGUSR2);
-				i++;
-				usleep(21000);
-			}
-			usleep(42000);
-			free(test);
-			j++;
-		}
-		i = 0;
-		while(i <= 6)
-		{
-			kill(pid, SIGUSR1);
-			usleep(55000);
-			i++;
-		}
+		ft_yacine(pid, av[2]);
+	}
+	else
+	{
+		ft_printf("error\n");
 	}
 }
