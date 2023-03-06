@@ -1,6 +1,7 @@
 SRCS_SERVER = server.c \
 
 SRCS_CLIENT = client.c \
+			index_client.c \
 
 OBJS_SERVER = $(SRCS_SERVER:.c=.o)
 

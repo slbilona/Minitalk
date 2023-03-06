@@ -1,18 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilselbon <ilselbon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/06 22:31:57 by ilselbon          #+#    #+#             */
+/*   Updated: 2023/03/06 22:39:46 by ilselbon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "server.h"
-#include <signal.h>
 
-char lettre[8];
+char	g_lettre[8];
 
-char *ft_strcat(char *str, char c)
+char	*ft_strcat(char *str, char c)
 {
-	int i;
-	char *new;
+	char	*new;
+	int		i;
 
 	i = 0;
-	if(!str)
+	if (!str)
 	{
 		new = malloc(sizeof(char) * 2);
-		if(!new)
+		if (!new)
 			return (NULL);
 		new[i] = c;
 		new[i + 1] = 0;
@@ -20,9 +31,9 @@ char *ft_strcat(char *str, char c)
 	else
 	{
 		new = malloc(sizeof(char) * (ft_strlen(str) + 2));
-		if(!new)
+		if (!new)
 			return (NULL);
-		while(str[i])
+		while (str[i])
 		{
 			new[i] = str[i];
 			i++;
@@ -34,29 +45,26 @@ char *ft_strcat(char *str, char c)
 	return (new);
 }
 
-char *ft_chaine_de_charac(char c)
+char	*ft_chaine_de_charac(char c)
 {
-	static char *chaine;
+	static char	*chaine;
 
-	if(c == 0)
+	if (c == 0)
 	{
 		ft_printf("%s\n", chaine);
 		free(chaine);
 		chaine = NULL;
 	}
 	else
-	{
 		chaine = ft_strcat(chaine, c);
-		//printf("%c\n", c);
-	}
 	return (chaine);
 }
 
-char ft_non_binaire(int c, int *result)
+char	ft_non_binaire(int c, int *result)
 {
-	if(c == 0 || (c >= 1 && c <= 9))
+	if (c == 0 || (c >= 1 && c <= 9))
 	{
-		if(c == 1)
+		if (c == 1)
 			*result = *result * 2 + 1;
 		else
 			*result = *result * 2;
@@ -69,91 +77,45 @@ char ft_non_binaire(int c, int *result)
 	return (*result);
 }
 
-// void ft_franchement_jsp()
-// {
-// 	int i;
-// 	int charac;
-
-// 	i = 0;
-// 	lettre[7] = 0;
-// 	charac = 0;
-// 	while(lettre[i])
-// 		i++;
-// 	lettre[i] = '0';
-// 	if(i == 6)
-// 	{
-// 		ft_non_binaire(ft_atoi(lettre), &charac);
-// 		ft_chaine_de_charac(charac);
-// 		//printf("%c\n", charac);
-// 		i = 0;
-// 		while(i < 7)
-// 			lettre[i++] = 0;
-// 	}
-// }
-
-// void ft_peut_etre_que_si()
-// {
-// 	int i;
-// 	int charac;
-
-// 	i = 0;
-// 	lettre[7] = 0;
-// 	charac = 0;
-// 	while(lettre[i])
-// 		i++;
-// 	lettre[i] = '1';
-// 	if(i == 6)
-// 	{
-// 		ft_non_binaire(ft_atoi(lettre), &charac);
-// 		ft_chaine_de_charac(charac);
-// 		//printf("%c\n", charac);
-// 		i = 0;
-// 		while(i < 7)
-// 			lettre[i++] = 0;
-// 	}
-// }
-
-void ft_test(int ref, siginfo_t *siginfo, void *context)
+void	ft_test(int ref, siginfo_t *siginfo, void *context)
 {
-	int pid;
-	int i;
-	int charac;
-	
+	int	pid;
+	int	i;
+	int	charac;
+
 	(void) context;
 	(void) siginfo;
 	pid = siginfo->si_pid;
 	i = 0;
-	lettre[7] = 0;
+	g_lettre[7] = 0;
 	charac = 0;
-	while(lettre[i])
+	while (g_lettre[i])
 		i++;
-	if(ref == SIGUSR1)
-		lettre[i] = '0';
+	if (ref == SIGUSR1)
+		g_lettre[i] = '0';
 	else if (ref == SIGUSR2)
-		lettre[i] = '1';
+		g_lettre[i] = '1';
 	if (i == 6)
 	{
-		ft_non_binaire(ft_atoi(lettre), &charac);
+		ft_non_binaire(ft_atoi(g_lettre), &charac);
 		ft_chaine_de_charac(charac);
 		i = 0;
-		while(i < 7)
-			lettre[i++] = 0;
+		while (i < 7)
+			g_lettre[i++] = 0;
 	}
 	kill(pid, SIGUSR1);
 }
 
-int main()
+int	main(void)
 {
-	struct sigaction sa = {0};
+	struct sigaction	sa = {0};
 
 	sa.sa_sigaction = ft_test;
 	sa.sa_flags = SA_SIGINFO;
-
-
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-
 	ft_printf("PID : %d\n", getpid());
-	while(1);
+	while (1)
+		;
 	return (0);
 }
