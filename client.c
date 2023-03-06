@@ -43,6 +43,7 @@ int ft_binaire(int c, int *result)
 	return (*result);
 }
 
+//ajouter les verif apres les kill
 void ft_yacine(int pid,char *str)
 {
 	char *test;
@@ -52,14 +53,11 @@ void ft_yacine(int pid,char *str)
 	
 
 	j = 0;
-	result = 0;
-	i = 0;
 	while(str[j])
 	{
 		result = 0;
 		i = 0;
 		test = ft_itoa(ft_binaire(str[j], &result));
-		//printf("test : %s\n", test);
 		if(ft_strlen(test) < 7)
 		{
 			while(i < (7 - (int)ft_strlen(test)) && booleen == 0)
