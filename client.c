@@ -29,23 +29,6 @@ int	ft_atoi(const char *nptr)
 	return (result * sign);
 }
 
-char *ft_strcat(char *str, char c)
-{
-	int i;
-	char *new;
-	i = 0;
-	new = malloc(sizeof(char) * (ft_strlen(str) + 2));
-	while(str[i])
-	{
-		new[i] = str[i];
-		i++;
-	}
-	new[i] = c;
-	new[i + 1] = 0;
-	free(str);
-	return (new);
-}
-
 int ft_binaire(int c, int *result)
 {
 	char *base = "01";
@@ -117,4 +100,3 @@ int main(int ac, char **av)
 		}
 	}
 }
-

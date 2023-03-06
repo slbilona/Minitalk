@@ -64,52 +64,55 @@ char ft_non_binaire(int c, int *result)
 	return (*result);
 }
 
-void ft_franchement_jsp()
-{
-	int i;
-	int charac;
+// void ft_franchement_jsp()
+// {
+// 	int i;
+// 	int charac;
 
-	i = 0;
-	lettre[7] = 0;
-	charac = 0;
-	while(lettre[i])
-		i++;
-	lettre[i] = '0';
-	if(i == 6)
-	{
-		ft_non_binaire(ft_atoi(lettre), &charac);
-		ft_chaine_de_charac(charac);
-		//printf("%c\n", charac);
-		i = 0;
-		while(i < 7)
-			lettre[i++] = 0;
-	}
-}
+// 	i = 0;
+// 	lettre[7] = 0;
+// 	charac = 0;
+// 	while(lettre[i])
+// 		i++;
+// 	lettre[i] = '0';
+// 	if(i == 6)
+// 	{
+// 		ft_non_binaire(ft_atoi(lettre), &charac);
+// 		ft_chaine_de_charac(charac);
+// 		//printf("%c\n", charac);
+// 		i = 0;
+// 		while(i < 7)
+// 			lettre[i++] = 0;
+// 	}
+// }
 
-void ft_peut_etre_que_si()
-{
-	int i;
-	int charac;
+// void ft_peut_etre_que_si()
+// {
+// 	int i;
+// 	int charac;
 
-	i = 0;
-	lettre[7] = 0;
-	charac = 0;
-	while(lettre[i])
-		i++;
-	lettre[i] = '1';
-	if(i == 6)
-	{
-		ft_non_binaire(ft_atoi(lettre), &charac);
-		ft_chaine_de_charac(charac);
-		//printf("%c\n", charac);
-		i = 0;
-		while(i < 7)
-			lettre[i++] = 0;
-	}
-}
+// 	i = 0;
+// 	lettre[7] = 0;
+// 	charac = 0;
+// 	while(lettre[i])
+// 		i++;
+// 	lettre[i] = '1';
+// 	if(i == 6)
+// 	{
+// 		ft_non_binaire(ft_atoi(lettre), &charac);
+// 		ft_chaine_de_charac(charac);
+// 		//printf("%c\n", charac);
+// 		i = 0;
+// 		while(i < 7)
+// 			lettre[i++] = 0;
+// 	}
+// }
 
 int main()
 {
+	struct sigaction sa;
+
+	sa.sa_sigaction = 
 	ft_printf("PID : %d\n", getpid());
 	while(1)
 	{
