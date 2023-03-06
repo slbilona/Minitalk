@@ -22,7 +22,7 @@ $(NAME) : client server
 
 client : $(OBJS_CLIENT)
 	make -C Ma_Libft
-	$(CC) $(OBJS_CLIENT) $(LIBFT) -o client 
+	$(CC) -g $(OBJS_CLIENT) $(LIBFT) -o client 
 
 server : $(OBJS_SERVER)
 	make -C Ma_Libft

@@ -12,12 +12,16 @@ char *ft_strcat(char *str, char c)
 	if(!str)
 	{
 		new = malloc(sizeof(char) * 2);
+		if(!new)
+			return (NULL);
 		new[i] = c;
 		new[i + 1] = 0;
 	}
 	else
 	{
 		new = malloc(sizeof(char) * (ft_strlen(str) + 2));
+		if(!new)
+			return (NULL);
 		while(str[i])
 		{
 			new[i] = str[i];
@@ -140,7 +144,7 @@ void ft_test(int ref, siginfo_t *siginfo, void *context)
 
 int main()
 {
-	struct sigaction sa;
+	struct sigaction sa = {0};
 
 	sa.sa_sigaction = ft_test;
 	sa.sa_flags = SA_SIGINFO;
@@ -151,6 +155,5 @@ int main()
 
 	ft_printf("PID : %d\n", getpid());
 	while(1);
-	pause();
 	return (0);
 }

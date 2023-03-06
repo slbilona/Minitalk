@@ -1,6 +1,5 @@
 #include <sys/types.h>
 #include <signal.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include "./Ma_Libft/libft.h"
 
@@ -67,21 +66,29 @@ void ft_yacine(int pid,char *str)
 			{
 				booleen = 1;
 				i++;
-				kill(pid, SIGUSR1);
+				if(kill(pid, SIGUSR1))
+					ft_printf("error\n");
 				while(booleen);
 			}
 		}
 		i = 0;
 		while(test[i] && booleen == 0)
 		{
-			//printf("booleen : %d\n", booleen);
+			
 			if(test[i] == '0')
+			{
+				booleen = 1;
 				kill(pid, SIGUSR1);
-			else if (test[i] == '1')
+				while(booleen);
+			}
+				
+			if(test[i] == '1')
+			{
+				booleen = 1;
 				kill(pid, SIGUSR2);
+				while(booleen);
+			}
 			i++;
-			booleen = 1;
-			while(booleen);
 		}
 		free(test);
 		j++;
@@ -106,18 +113,21 @@ void ft_principale(int ref)
 
 int main(int ac, char **av)
 {
-	struct sigaction	sa;
+	
 	int					pid;
 
 	pid = ft_atoi(av[1]);
-	sa.sa_handler = ft_principale;
-	sigaction(SIGUSR1, &sa, NULL);
+	
+	struct sigaction	ba = {0};
+
+	ba.sa_handler = ft_principale;
+	sigaction(SIGUSR1, &ba, NULL);
 
 	if (ac == 3)
 	{
-		if(pid == -1)
+		if(pid == -1 || pid == 0)
 		{
-			printf("error\n");
+			ft_printf("error\n");
 			return (0);
 		}
 		ft_yacine(pid, av[2]);
