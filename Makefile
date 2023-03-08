@@ -9,7 +9,7 @@ OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
 
 CC = gcc
 
-NAME = jsp
+NAME = minitalk
 
 CFLAGS = -Wall -Werror -Wextra
 
