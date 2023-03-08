@@ -5,100 +5,71 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilselbon <ilselbon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 22:31:59 by ilselbon          #+#    #+#             */
-/*   Updated: 2023/03/08 15:24:55 by ilselbon         ###   ########.fr       */
+/*   Created: 2023/03/06 22:32:02 by ilselbon          #+#    #+#             */
+/*   Updated: 2023/03/08 16:30:45 by ilselbon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "client.h"
 
-int	g_booleen = 0;
-
-int	ft_plus_de_place(char *test, int pid)
+int	ft_binaire(int c, int *result)
 {
-	int	i;
+	char	*base;
 
-	i = 0;
-	while (test[i] && g_booleen == 0)
+	base = "01";
+	if (c == 0 || c == 1)
+		*result = *result * 10 + (base[c] - 48);
+	else
 	{
-		g_booleen = 1;
-		if (test[i] == '0')
-		{
-			if (kill(pid, SIGUSR1))
-				return (free(test), ft_printf("Mauvais PID.\n"));
-		}
-		if (test[i] == '1')
-		{
-			if (kill(pid, SIGUSR2))
-				return (free(test), ft_printf("Mauvais PID.\n"));
-		}
-		while (g_booleen)
-			;
-		i++;
+		*result = ft_binaire(c / 2, result);
+		*result = ft_binaire(c % 2, result);
 	}
-	free(test);
-	return (0);
+	return (*result);
 }
 
-void	ft_fin(int pid)
+int	ft_atoi(const char *nptr)
 {
+	int	result;
 	int	i;
+	int	sign;
 
+	sign = 1;
 	i = 0;
-	while (i <= 6 && g_booleen == 0)
-	{
+	result = 0;
+	while ((9 <= nptr[i] && nptr[i] <= 13) || nptr[i] == ' ')
 		i++;
-		g_booleen = 1;
-		if (kill(pid, SIGUSR1))
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			sign = sign * -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		result = result * 10 + nptr[i] - 48;
+		i++;
+	}
+	return (result * sign);
+}
+
+int	main(int ac, char **av)
+{
+	struct sigaction	ba;
+	int					pid;
+
+	if (ac == 3)
+	{
+		ft_memset(&ba, 0, sizeof(ba));
+		pid = ft_atoi(av[1]);
+		ba.sa_handler = ft_principale;
+		sigaction(SIGUSR1, &ba, NULL);
+		if (pid == -1 || pid == 0)
 		{
 			ft_printf("Mauvais PID.\n");
-			return ;
+			return (0);
 		}
-		while (g_booleen)
-			;
+		ft_yacine(pid, av[2]);
 	}
-}
-
-void	ft_trop_court(int pid, char *test)
-{
-	int	i;
-
-	i = 0;
-	while (i < (7 - (int)ft_strlen(test)) && g_booleen == 0)
-	{
-		g_booleen = 1;
-		i++;
-		if (kill(pid, SIGUSR1))
-		{
-			ft_printf("Mauvais PID.\n");
-			return (free(test));
-		}
-		while (g_booleen)
-			;
-	}
-}
-
-void	ft_yacine(int pid, char *str)
-{
-	char	*test;
-	int		result;
-	int		j;
-
-	j = 0;
-	while (str[j])
-	{
-		result = 0;
-		test = ft_itoa(ft_binaire(str[j], &result));
-		if (ft_strlen(test) < 7)
-			ft_trop_court(pid, test);
-		ft_plus_de_place(test, pid);
-		j++;
-	}
-	ft_fin(pid);
-}
-
-void	ft_principale(int ref)
-{
-	if (ref == 10)
-		g_booleen = 0;
+	else
+		ft_printf("Error\n");
 }
