@@ -6,7 +6,7 @@
 /*   By: ilselbon <ilselbon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 22:32:02 by ilselbon          #+#    #+#             */
-/*   Updated: 2023/03/06 22:33:31 by ilselbon         ###   ########.fr       */
+/*   Updated: 2023/03/08 15:20:52 by ilselbon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,26 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (result * sign);
+}
+
+int	main(int ac, char **av)
+{
+	struct sigaction	ba;
+	int					pid;
+
+	ft_memset(&ba, 0, sizeof(ba));
+	pid = ft_atoi(av[1]);
+	ba.sa_handler = ft_principale;
+	sigaction(SIGUSR1, &ba, NULL);
+	if (ac == 3)
+	{
+		if (pid == -1 || pid == 0)
+		{
+			ft_printf("Mauvais PID.\n");
+			return (0);
+		}
+		ft_yacine(pid, av[2]);
+	}
+	else
+		ft_printf("Error\n");
 }

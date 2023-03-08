@@ -6,7 +6,7 @@
 /*   By: ilselbon <ilselbon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:19:39 by ilselbon          #+#    #+#             */
-/*   Updated: 2023/03/02 18:39:57 by ilselbon         ###   ########.fr       */
+/*   Updated: 2023/03/08 16:21:41 by ilselbon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
-	if(s)
+	if (s)
 	{
 		while (s[i])
 		i++;
